@@ -72,6 +72,7 @@
 	},
 	"file_history":
 	[
+		"/C/inetpub/wwwroot/KickstartDemoProject/kickstartdemoproject.sublime-project",
 		"/C/Users/stdavis/Desktop/Services.cs",
 		"/C/inetpub/wwwroot/SurfaceWaterQuality/trunk/content/ijit/modules/Identify.js",
 		"/C/Users/stdavis/AppData/Roaming/Sublime Text 2/Packages/User/conlog.sublime-snippet",
@@ -157,7 +158,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
