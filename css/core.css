@@ -1,0 +1,8 @@
+#map {
+	width: 100%;
+	height: 300px;
+	border: solid 1px gray;
+}
+label {
+	margin-right: 20px;
+}
