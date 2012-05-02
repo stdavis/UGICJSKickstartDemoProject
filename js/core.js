@@ -2,12 +2,18 @@ console.log('hello');
 // comments provide helpful information to make your code easier
 // for others (including your future self) to understand
 
-function myFunction() {
-	console.log('here1');
-}
+// this is a variable set to point at a string
+var baseUrl = 'http://mapserv.utah.gov/ArcGIS/rest/services/Imagery/';
 
-var car = {
-	color: 'blue',
-	numDoors: 4,
-	paidFor: true
+// this is a variable set to point at an object
+var urls = {
+	naip2011: baseUrl + 'UtahImagery-NAIP2011-4Band/ImageServer',
+	naip2009: baseUrl + 'UtahImagery-NAIP2009/ImageServer',
+	naip2006: baseUrl + 'UtahImagery-NAIP2006/ImageServer',
+	hro2006: baseUrl + 'UtahImagery-NAIP2006/ImageServer'
 };
+
+function init() {
+	// sets up the app
+	console.log('init fired');
+}
