@@ -13,6 +13,13 @@ var urls = {
 	hro2006: baseUrl + 'UtahImagery-NAIP2006/ImageServer'
 };
 
+var layers = {
+	naip2011: null,
+	naip2009: null,
+	naip2006: null,
+	hro2006: null
+};
+
 var map;
 function init() {
 	// sets up the app
@@ -23,10 +30,28 @@ function init() {
 	var iParams = new esri.layers.ImageServiceParameters();
 	iParams.bandIds = [0, 1, 2];
 
-	var naip2011Lyr = new esri.layers.ArcGISImageServiceLayer(urls.naip2011, {
+	layers.naip2011 = new esri.layers.ArcGISImageServiceLayer(urls.naip2011, {
 		imageServiceParameters: iParams
 	});
-	map.addLayer(naip2011Lyr);
+	map.addLayer(layers.naip2011);
+
+	layers.naip2009 = new esri.layers.ArcGISImageServiceLayer(urls.naip2009, {
+		imageServiceParameters: iParams,
+		visible: false
+	});
+	map.addLayer(layers.naip2009);
+
+	layers.naip2006 = new esri.layers.ArcGISImageServiceLayer(urls.naip2006, {
+		imageServiceParameters: iParams,
+		visible: false
+	});
+	map.addLayer(layers.naip2006);
+
+	layers.hro2006 = new esri.layers.ArcGISImageServiceLayer(urls.hro2006, {
+		imageServiceParameters: iParams,
+		visible: false
+	});
+	map.addLayer(layers.hro2006);
 }
 
 dojo.addOnLoad(init);
