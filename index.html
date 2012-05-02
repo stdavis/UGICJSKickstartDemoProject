@@ -2,11 +2,21 @@
 <html>
 	<head>
 		<title>AGRC Imagery Viewer</title>
+
+		<!-- CSS -->
+		<link href="http://serverapi.arcgisonline.com/jsapi/arcgis/2.8/js/dojo/dijit/themes/claro/claro.css" rel="stylesheet" type="text/css" >
 		<link rel='stylesheet' href='css/core.css'>
 
+		<!-- JAVASCRIPT -->
+		<script type='text/javascript'>
+			var djConfig = {
+				isDebug: true
+			};
+		</script>
+		<script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.8" type="text/javascript"></script>
 		<script src='js/core.js'></script>
 	</head>
-	<body>
+	<body class='claro'>
 		<h1>AGRC Imagery Viewer</h1>
 		<label>
 			<input type='radio' name='layers-group' checked/>
