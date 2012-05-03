@@ -9,7 +9,7 @@ dojo.declare('IdentifyTiles', null, {
 	// layersInd: {}
 	//		The indices of the layers within the map service
 	layersInd: {
-		// naip2011: '?',
+		naip2011: '44',
 		naip2009: '9',
 		naip2006: '12',
 		hro2006: '3'
@@ -65,7 +65,7 @@ dojo.declare('IdentifyTiles', null, {
 		//		Builds each of the query tasks and the query parameters object
 		console.info(this.declaredClass + "::" + arguments.callee.nom, arguments);
 
-		// qTasks.naip2011 = new esri.tasks.QueryTask(this.baseUrl + '/' + this.layerInd.naip2011);
+		this.qTasks.naip2011 = new esri.tasks.QueryTask(this.baseUrl + '/' + this.layersInd.naip2011);
 		this.qTasks.naip2009 = new esri.tasks.QueryTask(this.baseUrl + '/' + this.layersInd.naip2009);
 		this.qTasks.naip2006 = new esri.tasks.QueryTask(this.baseUrl + '/' + this.layersInd.naip2006);
 		this.qTasks.hro2006 = new esri.tasks.QueryTask(this.baseUrl + '/' + this.layersInd.hro2006);
