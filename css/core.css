@@ -6,3 +6,11 @@
 label {
 	margin-right: 20px;
 }
+#slider {
+	width: 500px;
+	margin-left: 23px;
+	margin-bottom: 30px;
+}
+#slider .dijitRuleLabelH {
+	width: 100px;
+}

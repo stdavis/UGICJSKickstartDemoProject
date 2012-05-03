@@ -24,6 +24,8 @@ var map;
 var currentLayer;
 var identify;
 
+dojo.require('dijit.form.Slider');
+
 function init() {
 	// sets up the app
 	console.log('init fired');
@@ -41,19 +43,19 @@ function init() {
 
 	layers.naip2009 = new esri.layers.ArcGISImageServiceLayer(urls.naip2009, {
 		imageServiceParameters: iParams,
-		visible: false
+		opacity: 0
 	});
 	map.addLayer(layers.naip2009);
 
 	layers.naip2006 = new esri.layers.ArcGISImageServiceLayer(urls.naip2006, {
 		imageServiceParameters: iParams,
-		visible: false
+		opacity: 0
 	});
 	map.addLayer(layers.naip2006);
 
 	layers.hro2006 = new esri.layers.ArcGISImageServiceLayer(urls.hro2006, {
 		imageServiceParameters: iParams,
-		visible: false
+		opacity: 0
 	});
 	map.addLayer(layers.hro2006);
 
@@ -66,6 +68,8 @@ function wireEvents() {
 	console.log('wireEvents fired');
 
 	dojo.query("input[type='radio']").onclick(onRadioClicked);
+
+	dojo.connect(dijit.byId('slider'), 'onChange', onSliderChange);
 }
 
 function onRadioClicked(evt) {
@@ -78,6 +82,24 @@ function onRadioClicked(evt) {
 	currentLayer.show();
 
 	identify.switchCurrentLayer(evt.target.value);
+}
+
+function onSliderChange(value) {
+	console.log('onSliderChange fired', arguments);
+
+	function updateLayers(bottomLayer, topLayer, opacity) {
+		bottomLayer.setOpacity(1 - opacity);
+		
+		topLayer.setOpacity(opacity);
+	}
+
+	if (value <= 1) {
+		updateLayers(layers.naip2011, layers.naip2009, value);
+	} else if (value > 1 && value <= 2) {
+		updateLayers(layers.naip2009, layers.naip2006, value - 1);
+	} else if (value >= 2) {
+		updateLayers(layers.naip2006, layers.hro2006, value - 2);
+	}
 }
 
 dojo.addOnLoad(init);

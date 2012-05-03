@@ -10,7 +10,8 @@
 		<!-- JAVASCRIPT -->
 		<script type='text/javascript'>
 			var djConfig = {
-				isDebug: true
+				isDebug: true,
+				parseOnLoad: true
 			};
 		</script>
 		<script src="http://serverapi.arcgisonline.com/jsapi/arcgis/?v=2.8" type="text/javascript"></script>
@@ -19,7 +20,7 @@
 	</head>
 	<body class='claro'>
 		<h1>AGRC Imagery Viewer</h1>
-		<label>
+		<!-- <label>
 			<input type='radio' name='layers-group' checked value='naip2011'/>
 			<span>NAIP 2011</span>
 		</label>
@@ -34,7 +35,16 @@
 		<label>
 			<input type='radio' name='layers-group' value='hro2006'/>
 			<span>HRO 2006</span>
-		</label>
+		</label> -->
+		<div id="slider" dojoType="dijit.form.HorizontalSlider"
+		    value="0" minimum="0" maximum="3" intermediateChanges="true" showButtons="false">
+		  <ol dojoType="dijit.form.HorizontalRuleLabels" container="bottomDecoration">
+		    <li>NAIP 2011</li>
+		    <li>NAIP 2009</li>
+		    <li>NAIP 2006</li>
+		    <li>HRO 2006</li>
+		  </ol>
+		</div>
 		<p>Click on the map to get image tile download information.</p>
 		<div id='map'></div>
 		<a id='download-link'></a>
