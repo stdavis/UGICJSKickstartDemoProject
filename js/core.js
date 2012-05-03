@@ -22,6 +22,7 @@ var layers = {
 
 var map;
 var currentLayer;
+var identify;
 
 function init() {
 	// sets up the app
@@ -57,6 +58,8 @@ function init() {
 	map.addLayer(layers.hro2006);
 
 	wireEvents();
+
+	identify = new IdentifyTiles();
 }
 
 function wireEvents() {
@@ -73,6 +76,8 @@ function onRadioClicked(evt) {
 	currentLayer = layers[evt.target.value];
 
 	currentLayer.show();
+
+	identify.switchCurrentLayer(evt.target.value);
 }
 
 dojo.addOnLoad(init);
