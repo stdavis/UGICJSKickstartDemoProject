@@ -21,6 +21,8 @@ var layers = {
 };
 
 var map;
+var currentLayer;
+
 function init() {
 	// sets up the app
 	console.log('init fired');
@@ -34,6 +36,7 @@ function init() {
 		imageServiceParameters: iParams
 	});
 	map.addLayer(layers.naip2011);
+	currentLayer = layers.naip2011;
 
 	layers.naip2009 = new esri.layers.ArcGISImageServiceLayer(urls.naip2009, {
 		imageServiceParameters: iParams,
@@ -52,6 +55,24 @@ function init() {
 		visible: false
 	});
 	map.addLayer(layers.hro2006);
+
+	wireEvents();
+}
+
+function wireEvents() {
+	console.log('wireEvents fired');
+
+	dojo.query("input[type='radio']").onclick(onRadioClicked);
+}
+
+function onRadioClicked(evt) {
+	console.log('onRadioClicked fired', arguments);
+
+	currentLayer.hide();
+
+	currentLayer = layers[evt.target.value];
+
+	currentLayer.show();
 }
 
 dojo.addOnLoad(init);
