@@ -18,6 +18,8 @@ var layers = {
 var currentLayer;
 var identify;
 
+dojo.require('dijit.form.Slider');
+
 function init() {
     // sets up the app
     console.log('init fired');
@@ -26,19 +28,19 @@ function init() {
 
     layers.hro2012 = new esri.layers.ArcGISImageServiceLayer(urls.hro2012);
     layers.hro2009 = new esri.layers.ArcGISImageServiceLayer(urls.hro2009, {
-        visible: false
+        // visible: false
     });
     layers.uao2003 = new esri.layers.ArcGISImageServiceLayer(urls.uao2003, {
-        visible: false
+        // visible: false
     });
     layers.doq1990 = new esri.layers.ArcGISImageServiceLayer(urls.doq1990, {
-        visible: false
+        // visible: false
     });
 
-    map.addLayer(layers.hro2012);
-    map.addLayer(layers.hro2009);
-    map.addLayer(layers.uao2003);
     map.addLayer(layers.doq1990);
+    map.addLayer(layers.uao2003);
+    map.addLayer(layers.hro2009);
+    map.addLayer(layers.hro2012);
 
     currentLayer = layers.hro2012;
 
@@ -50,19 +52,25 @@ function init() {
 function wireEvents() {
     console.log('wireEvents fired');
 
-    dojo.query("input[type='radio']").onclick(onRadioClicked);
+    dojo.connect(dijit.byId('slider'), 'onChange', onSliderChange);
 }
 
-function onRadioClicked(evt) {
-    console.log('onRadioClicked fired');
+function onSliderChange(value) {
+    console.log('onSliderChange fired', arguments);
 
-    currentLayer.hide();
+    function updateLayers(bottomLayer, topLayer, opacity) {
+        bottomLayer.setOpacity(1 - opacity);
+        
+        topLayer.setOpacity(opacity);
+    }
 
-    currentLayer = layers[evt.target.value];
-
-    currentLayer.show();
-
-    identify.switchCurrentLayer(evt.target.value);
+    if (value <= 1) {
+        updateLayers(layers.hro2012, layers.hro2009, value);
+    } else if (value > 1 && value <= 2) {
+        updateLayers(layers.hro2009, layers.uao2003, value - 1);
+    } else if (value >= 2) {
+        updateLayers(layers.uao2003, layers.doq1990, value - 2);
+    }
 }
 
 dojo.ready(init);
