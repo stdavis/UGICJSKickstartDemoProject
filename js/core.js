@@ -9,6 +9,12 @@ var urls = {
     uao2003: baseUrl + 'AerialPhotography_Color/UAO2003_Color1Foot/ImageServer',
     doq1990: baseUrl + 'AerialPhotography_BlackWhite/DOQ1990s_1Meter/ImageServer'
 };
+var layers = {
+    hro2012: null,
+    hro2009: null,
+    uao2003: null,
+    doq1990: null
+};
 
 function init() {
     // sets up the app
@@ -16,12 +22,21 @@ function init() {
 
     var map = esri.Map('map');
 
-    var hro2012Lyr = new esri.layers.ArcGISImageServiceLayer(urls.hro2012);
-    var hro2009Lyr = new esri.layers.ArcGISImageServiceLayer(urls.hro2009);
-    var uao2003Lyr = new esri.layers.ArcGISImageServiceLayer(urls.uao2003);
-    var doq1990Lyr = new esri.layers.ArcGISImageServiceLayer(urls.doq1990);
+    layers.hro2012 = new esri.layers.ArcGISImageServiceLayer(urls.hro2012);
+    layers.hro2009 = new esri.layers.ArcGISImageServiceLayer(urls.hro2009, {
+        visible: false
+    });
+    layers.uao2003 = new esri.layers.ArcGISImageServiceLayer(urls.uao2003, {
+        visible: false
+    });
+    layers.doq1990 = new esri.layers.ArcGISImageServiceLayer(urls.doq1990, {
+        visible: false
+    });
 
-    map.addLayer(hro2012Lyr);
+    map.addLayer(layers.hro2012);
+    map.addLayer(layers.hro2009);
+    map.addLayer(layers.uao2003);
+    map.addLayer(layers.doq1990);
 }
 
 dojo.ready(init);
