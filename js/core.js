@@ -13,4 +13,15 @@ var urls = {
 function init() {
     // sets up the app
     console.log('init fired');
+
+    var map = esri.Map('map');
+
+    var hro2012Lyr = new esri.layers.ArcGISImageServiceLayer(urls.hro2012);
+    var hro2009Lyr = new esri.layers.ArcGISImageServiceLayer(urls.hro2009);
+    var uao2003Lyr = new esri.layers.ArcGISImageServiceLayer(urls.uao2003);
+    var doq1990Lyr = new esri.layers.ArcGISImageServiceLayer(urls.doq1990);
+
+    map.addLayer(hro2012Lyr);
 }
+
+dojo.ready(init);
