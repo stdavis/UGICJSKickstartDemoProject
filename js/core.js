@@ -15,6 +15,7 @@ var layers = {
     uao2003: null,
     doq1990: null
 };
+var currentLayer;
 
 function init() {
     // sets up the app
@@ -37,6 +38,26 @@ function init() {
     map.addLayer(layers.hro2009);
     map.addLayer(layers.uao2003);
     map.addLayer(layers.doq1990);
+
+    currentLayer = layers.hro2012;
+
+    wireEvents();
+}
+
+function wireEvents() {
+    console.log('wireEvents fired');
+
+    dojo.query("input[type='radio']").onclick(onRadioClicked);
+}
+
+function onRadioClicked(evt) {
+    console.log('onRadioClicked fired');
+
+    currentLayer.hide();
+
+    currentLayer = layers[evt.target.value];
+
+    currentLayer.show();
 }
 
 dojo.ready(init);
